@@ -1,0 +1,410 @@
+:root{
+  --bg: #ffffff;
+  --panel: rgba(10, 12, 18, 0.75);
+  --line: rgba(255,255,255,0.12);
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.70);
+  --accent: #ffffff;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+*{
+  font: italic;
+}
+
+.calculator-body{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding-top: 70px;
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("img/backg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.calc{
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: var(--panel);
+  border: 3px solid var(--line);
+  box-shadow:
+    0 18px 50px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+}
+
+.result{
+  width: 240px;
+  height: 54px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+
+  background: rgba(0,0,0,0.55);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+
+  text-align: right;
+  color: var(--text);
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+}
+
+.my-btn{
+  margin-right: 6px;
+  margin-top: 6px;
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+  border: 1px solid var(--line);
+
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+
+  cursor: pointer;
+  user-select: none;
+
+  box-shadow:
+    0 10px 18px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.my-btn:hover{
+  filter: brightness(120%);
+  box-shadow:
+    0 12px 22px rgba(0,0,0,0.40),
+    0 0 14px rgba(255,255,255,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+.my-btn:active{
+  transform: translateY(1px) scale(0.99);
+  filter: brightness(140%);
+}
+
+.my-btn.primary{
+  background: rgba(255, 123, 0, 0.1);
+  border-color: rgba(255, 123, 0, 0.15);
+}
+
+.my-btn.secondary{
+  background: rgba(255,255,255,0.3);
+  color: var(--muted);
+}
+
+.my-btn.execute{
+  width: 114px;
+  border-radius: 999px;
+  background: rgba(255, 123, 0, 0.1);
+  border-color: rgba(255, 123, 0, 0.15);
+}
+
+#btn_digit_dot{
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVZa280SOsJJhw-O7YQKD9tGzGyaGIFVzJ-A&s");
+  background-size: 200%;
+  background-position: center;
+}
+
+#btn_digit_0{
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmIp1DTrvRWpFBXm30Gcj0T9QejS3LnLuyuQ&s");
+  background-size: 130%;
+  background-position: center;
+}
+
+#btn_digit_1{
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-qDYO4BbkLf5DpXYOjHcyXAR7Cv0VSl63CA&s");
+  background-size: 120%;
+  background-position: center;
+}
+
+#btn_digit_2{
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmeZ1l9CPD2J4VSdG0KOclLXz_zN5j4cbgNg&s");
+  background-size: 120%;
+  background-position: center;
+}
+
+#btn_digit_3{
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4LlmCUYVH7pPSbCWe9wl3f4fwNB7Gw8KZiQ&s");
+  background-size: 115%;
+  background-position: center;
+}
+
+#btn_digit_4{
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxdLbmicH5f-B-TVhwDesVMeSjh1FuZZrxQQ&s");
+  background-size: 130%;
+  background-position: center;
+}
+
+#btn_digit_5{
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+    url("https://w7.pngwing.com/pngs/392/871/png-transparent-jupiter-planet.png");
+  background-size: 130%;
+  background-position: center;
+}
+
+#btn_digit_6{
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url("https://www.pngarts.com/files/4/Saturn-PNG-Picture.png");
+  background-size: 300%;
+  background-position: center;
+}
+
+#btn_digit_7{
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRboMi7MS3CVoWA_AeirsSzWpHqV1miA1p_wQ&s");
+  background-size: 120%;
+  background-position: center;
+}
+
+#btn_digit_8{
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-X7hJzHpgtlaqg73F2e_wk7Mizd8Z3QxaVw&s");
+  background-size: 130%;
+  background-position: center;
+}
+
+#btn_digit_9{
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+    url("https://static.vecteezy.com/system/resources/previews/051/455/731/non_2x/pluto-the-largest-planet-in-the-solar-system-free-png.png");
+  background-size: 120%;
+  background-position: center;
+}
+
+/* Шапка NASA */
+.space-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: black;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+  box-sizing: border-box;
+  z-index: 1000;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Чтобы калькулятор не прятался под fixed header */
+body{
+  padding-top: 70px;
+}
+
+/* Левая часть */
+.nav-left{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Кнопка Explore */
+.explore-btn{
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.arrow{
+  font-size: 14px;
+}
+
+/* Выпадающее меню */
+.explore-menu{
+  display: none;
+  position: absolute;
+  top: 45px;
+  left: 0;
+  min-width: 180px;
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px 0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+.explore-menu a{
+  display: block;
+  padding: 10px 16px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.explore-menu a:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+/* Когда меню открыто */
+.explore-menu.show{
+  display: block;
+}
+
+/* Логотип по центру */
+.nav-logo{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logo img{
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
+/* Правое меню */
+.nav-right{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-right span{
+  cursor: pointer;
+}
+
+.live{
+  border: 1px solid red;
+  padding: 3px 6px;
+  font-size: 12px;
+}
+
+
+/* ---Главная страница--- */
+
+.home-body{
+  margin: 0;
+  min-height: 100vh;
+  background: #f2f2f2;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.home-main{
+  padding-top: 70px;
+}
+
+/* Верхний белый блок */
+.home-top{
+  background: #f3f3f3;
+  padding: 70px 60px;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.home-top-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-label{
+  margin: 0 0 20px 0;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #444;
+}
+
+.home-top h1{
+  margin: 0 0 24px 0;
+  font-size: 40px;
+  line-height: 1.1;
+  max-width: 980px;
+}
+
+.home-description{
+  margin: 0;
+  max-width: 900px;
+  font-size: 24px;
+  line-height: 1.5;
+  color: #2c2c2c;
+}
+
+/* Нижний большой баннер */
+.hero-about{
+  padding: 60px 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.52)),
+    url("img/space-background.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-overlay{
+  max-width: 760px;
+  padding: 60px;
+  color: white;
+}
+
+.hero-label{
+  margin: 0 0 18px 0;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.85);
+}
+
+.hero-overlay h2{
+  margin: 0 0 24px 0;
+  font-size: 72px;
+  line-height: 1;
+}
+
+.hero-text{
+  margin: 0 0 18px 0;
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 720px;
+}
+
+.hero-overlay a{
+  color: #8ecbff;
+  text-decoration: underline;
+}
+
+.hero-overlay a:hover{
+  color: white;
+}
