@@ -68,7 +68,7 @@
 </body>
 ```
 2) 
-```javascript
+```CSS
 * {
     font-style: italic;
 }
