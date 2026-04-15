@@ -1,0 +1,24 @@
+{
+  "name": "iu5-javascript-savinskii",
+  "version": "1.0.0",
+  "description": "**Студент:**  Савинский А. Ю. **Группа:** ИУ5-44Б",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locos1k/IU5-JavaScript-Savinskii.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/locos1k/IU5-JavaScript-Savinskii/issues"
+  },
+  "homepage": "https://github.com/locos1k/IU5-JavaScript-Savinskii#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  }
+}
