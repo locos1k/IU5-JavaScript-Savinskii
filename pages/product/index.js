@@ -1,6 +1,7 @@
 import { HeaderComponent } from "../../components/header/index.js";
 import { ProductComponent } from "../../components/product/index.js";
 import { MainPage } from "../main/index.js";
+import { ModelViewerComponent } from "../../components/model-viewer/index.js";
 
 export class ProductPage {
     constructor(parent, id, data) {
@@ -54,5 +55,8 @@ export class ProductPage {
         const data = this.getCurrent();
         const product = new ProductComponent(this.pageRoot);
         product.render(data, this.saveSpeed.bind(this));
+
+        const modelViewer = new ModelViewerComponent(this.pageRoot);
+        modelViewer.render("img/about-space.jpg");
     }
 }

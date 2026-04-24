@@ -32,6 +32,37 @@ export class MainPage {
                             Добавить
                         </button>
                     </div>
+
+                    <div class="card p-3 mb-4">
+                        <h4 class="mb-3">Домашнее задание</h4>
+
+                        <div class="mb-3">
+                            <label for="orbit-prefix-input" class="form-label">
+                                Проверка префиксов строки перехода
+                            </label>
+                            <input
+                                id="orbit-prefix-input"
+                                type="text"
+                                class="form-control"
+                                placeholder="Введите строку, например geostationary"
+                            >
+                            <button id="count-prefix-button" class="btn details-btn mt-2">
+                                Посчитать префиксы
+                            </button>
+                            <p id="prefix-result" class="mt-2 mb-0"></p>
+                        </div>
+
+                        <div>
+                            <label class="form-label">
+                                Сортировка букв в словах и сортировка слов
+                            </label>
+                            <button id="sort-orbit-words-button" class="btn details-btn">
+                                Отсортировать названия орбит
+                            </button>
+                            <p id="sort-result" class="mt-2 mb-0"></p>
+                        </div>
+                    </div>
+
                     <div id="main-page" class="d-flex flex-wrap gap-3"></div>
                 </div>
             </div>
@@ -44,6 +75,82 @@ export class MainPage {
 
         document.getElementById("add-card-button")
             .addEventListener("click", this.addCard.bind(this));
+
+        document.getElementById("count-prefix-button")
+            .addEventListener("click", this.countOrbitPrefixes.bind(this));
+
+        document.getElementById("sort-orbit-words-button")
+            .addEventListener("click", this.sortOrbitWords.bind(this));
+    }
+
+    countOrbitRequestPrefixes(orbitWordsCollection, orbitRequestString) {
+        let orbitPrefixCount = 0;
+
+        orbitWordsCollection.forEach((orbitWord) => {
+            if (orbitRequestString.startsWith(orbitWord)) {
+                orbitPrefixCount += 1;
+            }
+        });
+
+        return orbitPrefixCount;
+    }
+
+    countOrbitPrefixes() {
+        const orbitRequestInput = document.getElementById("orbit-prefix-input").value.toLowerCase();
+
+        const orbitWordsCollection = [
+            "g",
+            "ge",
+            "geo",
+            "geos",
+            "geost",
+            "orbit",
+            "station",
+            "geostationary"
+        ];
+
+        const orbitPrefixCount = this.countOrbitRequestPrefixes(
+            orbitWordsCollection,
+            orbitRequestInput
+        );
+
+        document.getElementById("prefix-result").textContent =
+            `Количество слов-префиксов: ${orbitPrefixCount}`;
+    }
+
+    formatOrbitSentence(orbitSentenceString) {
+        let normalizedOrbitSentence = orbitSentenceString.trim();
+
+        do {
+            normalizedOrbitSentence = normalizedOrbitSentence.replaceAll("  ", " ");
+        } while (normalizedOrbitSentence.includes("  "));
+
+        const orbitWordsArray = normalizedOrbitSentence.split(" ");
+
+        const sortedOrbitWordsArray = orbitWordsArray.map((orbitWord) => {
+            const lowerOrbitWord = orbitWord.toLowerCase();
+            const sortedLetters = lowerOrbitWord.split("").sort().join("");
+            return sortedLetters;
+        });
+
+        sortedOrbitWordsArray.sort();
+
+        const formattedOrbitWordsArray = sortedOrbitWordsArray.map((orbitWord) => {
+            return orbitWord.charAt(0).toUpperCase() + orbitWord.slice(1).toLowerCase();
+        });
+
+        return formattedOrbitWordsArray.join(" ");
+    }
+
+    sortOrbitWords() {
+        const orbitNamesSentence = this.data
+            .map((orbitObject) => orbitObject.type)
+            .join(" ");
+
+        const formattedOrbitSentence = this.formatOrbitSentence(orbitNamesSentence);
+
+        document.getElementById("sort-result").textContent =
+            `Результат сортировки: ${formattedOrbitSentence}`;
     }
 
     filterCards(e) {
