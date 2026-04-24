@@ -1,71 +1,134 @@
-# ЛР 2. Calculator. JavaScript
+# ЛР 3. Простое веб-приложение. Верстка
 
-**Студент:**  Савинский А. Ю.
-**Группа:** ИУ5-44Б
+**Савинский А. Ю. ИУ5-44Б**
 
-**Тема:** Заявки на переходы космических аппаратов на различные орбиты
+## Содержание <!-- omit in toc -->
 
+- [Цель работы](#цель-данной-лабораторной-работы)
+- [Тема](#тема)
+- [Сайт для вдохновения](#сайт-для-вдохновения)
+- [Дополнительные задания](#дополнительные-задания)
+- [План](#план)
+- [Задание](#задание)
+
+## Цель данной лабораторной работы 
+Знакомство с node, npm, написание простого приложения на JavaScript. В ходе выполнения работы, вам предстоит ознакомиться с кодом реализации простого интерфейса и вывода данных, и затем выполнить задания по варианту.
+
+## Тема
+Заявки на переходы космических аппаратов на различные орбиты
+
+## Сайт для вдохновения
 Стиль вдохновлен сайтом https://www.nasa.gov/
 
-**Цель** данной лабораторной работы - знакомство с инструментами построения пользовательских интерфейсов web-сайтов: HTML, CSS, JavaScript. В ходе выполнения работы, вам предстоит продолжить реализовывать простой калькулятор, и затем выполнить задания по варианту.
+## Дополнительные задания
+1. На странице подробнее каждой карточки добавить поле для ввода скорости спутника на определенной орбите, при вводе значения и нажатии кнопки "Сохрнаить" новое значение должно отображаться на карточке на главной странице
 
-## Содержание
+components/product-card/index.js
+```js
+...
+getHTML(data) {
+    return `
+        <div class="card" style="width: 300px;">
+           ...
+                <h5 class="card-title">${data.title}</h5>
+                <p class="card-text">${data.text}</p>
+                <p class="card-text"><strong>Скорость на орбите:</strong> ${data.speed}</p>
+                <span class="badge orbit-badge mb-3">${data.type}</span>
+           ...
+        </div>
+    `;
+}
+...
+```
 
-* [Задание](#задание)
-* [Дополнительное задание](#дополнительное-задание)
-
-## Задание
-
-1. Создать файл JavaScript (например, script.js) и подключить его к HTML-странице калькулятора.
-2. Получить доступ к элементам интерфейса страницы (кнопкам и полю вывода результата) с помощью методов работы с DOM, например:
-* получение элементов по id,
-* по классу,
-* по селектору.
-3. Реализовать обработчики событий для кнопок калькулятора (нажатие кнопок цифр и операций).
-4. Организовать хранение данных вычисления:
-* первое число,
-* второе число,
-* выбранная арифметическая операция,
-* результат вычисления.
-5. Реализовать ввод чисел при нажатии кнопок 0–9 и точки.
-6. Реализовать выполнение основных арифметических операций:
-* сложение +,
-* вычитание -,
-* умножение ×,
-* деление /.
-7. Реализовать кнопку очистки (C), которая сбрасывает текущие данные калькулятора.
-8. Реализовать кнопку «=», выполняющую вычисление выбранной операции и вывод результата в поле отображения.
-
-## Дополнительное задание
-**Условие:** после вычисления выражения преобразовать результат в шестнадцатеричную систему счисления и использовать его в качестве HEX-цвета для окрашивания отображаемого результата
-
-**Решение:** 
-```javascript
-window.onload = function () {
-
-  ...
-  function resultToHexColor(value) { 
-    let number = Math.abs(Math.round(value)); 
-    let hex = number.toString(16);            
-
-    if (hex.length < 6) {
-      hex = hex.padStart(6, '0');
-    } else if (hex.length > 6) {
-      hex = hex.slice(-6);
+components/product/index.js
+```js
+export class ProductComponent {
+    constructor(parent) {
+        this.parent = parent;
     }
 
-    return '#' + hex;
-  }
-  ...
+    getHTML(data) {
+        return `
+            <div class="card mb-3" style="max-width: 900px;">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        ...
+                            <p class="card-text">
+                                <strong>Скорость на орбите:</strong> ${data.speed}
+                            </p>
 
-  document.getElementById('btn_op_equal').onclick = function () {
-    ...
+                            <div class="mt-3">
+                                <label for="speed-input" class="form-label">Изменить скорость</label>
+                                <input
+                                    id="speed-input"
+                                    type="text"
+                                    class="form-control"
+                                    value="${data.speed}"
+                                >
+                            </div>
 
-    const hexColor = resultToHexColor(expressionResult);
+                            <button id="save-speed-button" class="btn details-btn mt-3">
+                                Сохранить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
 
-    outputElement.style.color = hexColor;
+    addListeners(listener) {
+        document
+            .getElementById("save-speed-button")
+            .addEventListener("click", listener);
+    }
 
-    outputElement.innerHTML = a;
-  };
-};
+    render(data, listener) {
+        const html = this.getHTML(data);
+        this.parent.insertAdjacentHTML('beforeend', html);
+        this.addListeners(listener);
+    }
+}
 ```
+
+pages/product/index.js
+```js
+...
+    saveSpeed() {
+        const current = this.getCurrent();
+        const newSpeed = document.getElementById("speed-input").value;
+
+        current.speed = newSpeed;
+
+        const page = new MainPage(this.parent);
+        page.render();
+    }
+
+    render() {
+        this.parent.innerHTML = '';
+        this.parent.insertAdjacentHTML('beforeend', this.getHTML());
+
+        const header = new HeaderComponent(document.getElementById("header-root"));
+        header.render(this.clickHome.bind(this), true, "Назад");
+
+        const data = this.getCurrent();
+        const product = new ProductComponent(this.pageRoot);
+        product.render(data, this.saveSpeed.bind(this));
+    }
+...
+```
+## План
+
+1. Инструменты для работы
+2. Что такое node, npm и package.json
+3. Как работать с html в JS
+4. Инициализация проекта
+5. Создание главной страницы, подключение bootstrap
+6. Простая кнопка на JavaScript
+7. Структурирование проекта
+8. Верстка главной страницы
+9. Верстка страницы продукта
+
+## Задание 
+Знакомство с node, npm. Верстка интерфейса с карточками (страница списка с фильтрацией и страница подробнее), данные получать через mock объекты (коллекция). Добавить кнопку добавления (копировать первую карточку), кнопку удаления карточки. В хедере на обеих страницах должна быть кнопка Домой
