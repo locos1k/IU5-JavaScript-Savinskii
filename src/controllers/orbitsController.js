@@ -53,48 +53,6 @@ const createOrbit = (req, res) => {
     res.status(201).json(newOrbit);
 };
 
-const replaceOrbit = (req, res) => {
-    const id = Number(req.params.id);
-
-    if (Number.isNaN(id)) {
-        return res.status(400).json({
-            error: 'Некорректный id'
-        });
-    }
-
-    const {
-        src,
-        title,
-        text,
-        type,
-        details,
-        speed
-    } = req.body;
-
-    if (!src || !title || !text || !type || !details || !speed) {
-        return res.status(400).json({
-            error: 'Для PUT нужно передать все поля записи'
-        });
-    }
-
-    const replacedOrbit = orbitsService.replace(id, {
-        src,
-        title,
-        text,
-        type,
-        details,
-        speed
-    });
-
-    if (!replacedOrbit) {
-        return res.status(404).json({
-            error: 'Запись не найдена'
-        });
-    }
-
-    res.status(200).json(replacedOrbit);
-};
-
 const updateOrbit = (req, res) => {
     const id = Number(req.params.id);
 
@@ -139,7 +97,6 @@ module.exports = {
     getAllOrbits,
     getOrbitById,
     createOrbit,
-    replaceOrbit,
     updateOrbit,
     deleteOrbit
 };

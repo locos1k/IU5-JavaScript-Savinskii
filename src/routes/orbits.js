@@ -6,7 +6,6 @@ const orbitsController = require('../controllers/orbitsController');
 router.get('/', orbitsController.getAllOrbits);
 router.get('/:id', orbitsController.getOrbitById);
 router.post('/', orbitsController.createOrbit);
-router.put('/:id', orbitsController.replaceOrbit);
 router.patch('/:id', orbitsController.updateOrbit);
 router.delete('/:id', orbitsController.deleteOrbit);
 

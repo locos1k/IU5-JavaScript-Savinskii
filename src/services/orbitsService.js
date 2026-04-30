@@ -47,27 +47,6 @@ const create = (orbitData) => {
     return newOrbit;
 };
 
-const replace = (id, orbitData) => {
-    const orbits = fileService.readData(dataFilePath);
-
-    const index = orbits.findIndex((orbit) => orbit.id === id);
-
-    if (index === -1) {
-        return null;
-    }
-
-    const replacedOrbit = {
-        id: id,
-        ...orbitData
-    };
-
-    orbits[index] = replacedOrbit;
-
-    fileService.writeData(dataFilePath, orbits);
-
-    return replacedOrbit;
-};
-
 const update = (id, orbitData) => {
     const orbits = fileService.readData(dataFilePath);
 
@@ -106,7 +85,6 @@ module.exports = {
     findAll,
     findOne,
     create,
-    replace,
     update,
     remove
 };
