@@ -1,0 +1,29 @@
+{
+  "name": "iu5-javascript-savinskii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "express": "^5.2.1"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/locos1k/IU5-JavaScript-Savinskii.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/locos1k/IU5-JavaScript-Savinskii/issues"
+  },
+  "homepage": "https://github.com/locos1k/IU5-JavaScript-Savinskii#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
