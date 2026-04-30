@@ -5,11 +5,6 @@ const terminal = readline.createInterface({
     output: process.stdout
 });
 
-// -----------------------------
-// Задание 2.10
-// Подсчёт слов-префиксов
-// -----------------------------
-
 function countOrbitRequestPrefixes(orbitWordsCollection, orbitRequestString) {
     let orbitPrefixCount = 0;
 
@@ -22,17 +17,9 @@ function countOrbitRequestPrefixes(orbitWordsCollection, orbitRequestString) {
     return orbitPrefixCount;
 }
 
-// -----------------------------
-// Задание 3.4
-// Сортировка букв в словах
-// и сортировка слов в предложении
-// -----------------------------
-
 function formatOrbitSentence(orbitSentenceString) {
     let normalizedOrbitSentence = orbitSentenceString.trim();
 
-    // Цикл с постусловием:
-    // выполняется, пока в строке есть двойные пробелы
     do {
         normalizedOrbitSentence = normalizedOrbitSentence.replaceAll("  ", " ");
     } while (normalizedOrbitSentence.includes("  "));
@@ -55,10 +42,6 @@ function formatOrbitSentence(orbitSentenceString) {
     return formattedOrbitWordsArray.join(" ");
 }
 
-// -----------------------------
-// Меню приложения
-// -----------------------------
-
 function showMenu() {
     console.log("\n=== Домашнее задание: работа с коллекциями ===");
     console.log("1. Задание 2.10 — посчитать слова-префиксы");
@@ -79,10 +62,6 @@ function showMenu() {
         }
     });
 }
-
-// -----------------------------
-// Запуск задания 2.10
-// -----------------------------
 
 function runPrefixTask() {
     terminal.question("Введите слова через пробел: ", (wordsInput) => {
@@ -108,10 +87,6 @@ function runPrefixTask() {
     });
 }
 
-// -----------------------------
-// Запуск задания 3.4
-// -----------------------------
-
 function runSortTask() {
     terminal.question("Введите предложение: ", (orbitSentenceString) => {
         const result = formatOrbitSentence(orbitSentenceString);
@@ -122,5 +97,4 @@ function runSortTask() {
     });
 }
 
-// запуск программы
 showMenu();
