@@ -9,7 +9,7 @@ const init = (filePath) => {
 const findAll = (query) => {
     const orbits = fileService.readData(dataFilePath);
 
-    const { title, type } = query;
+    const { title, type, text } = query;
 
     return orbits.filter((orbit) => {
         const titleMatches = title
@@ -20,7 +20,11 @@ const findAll = (query) => {
             ? orbit.type.toLowerCase().includes(type.toLowerCase())
             : true;
 
-        return titleMatches && typeMatches;
+        const textMatches = text
+            ? orbit.text.toLowerCase().includes(text.toLowerCase())
+            : true;
+
+        return titleMatches && typeMatches && textMatches;
     });
 };
 
